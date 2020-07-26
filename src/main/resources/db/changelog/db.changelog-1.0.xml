@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <preConditions>
+        <runningAs  username="postgres"/>
+    </preConditions>
+
+    <changeSet  id="1"  author="marvin">
+        <createTable  tableName="report_data">
+            <column  name="id"  type="int"  autoIncrement="true">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column  name="customer"  type="varchar(50)"/>
+            <column  name="customer_email"  type="varchar(50)">
+                <constraints  nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="2" author="marvin">
+        <createTable tableName="report">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="report_PDF" type="blob">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="marvin">
+        <addColumn tableName="report_data">
+            <column name="report_nr" type="int">
+                <constraints foreignKeyName="fk_report_nr" referencedTableName="report" referencedColumnNames="id"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
