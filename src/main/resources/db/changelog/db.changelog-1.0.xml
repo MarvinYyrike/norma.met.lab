@@ -22,7 +22,7 @@
             </column>
         </createTable>
     </changeSet>
-    
+
     <changeSet id="2" author="marvin">
         <createTable tableName="report">
             <column name="id" type="int" autoIncrement="true">
@@ -39,5 +39,37 @@
                 <constraints foreignKeyName="fk_report_nr" referencedTableName="report" referencedColumnNames="id"></constraints>
             </column>
         </addColumn>
+    </changeSet>
+
+    <changeSet id="4" author="marvin">
+        <addColumn tableName="report_data">
+            <column name="order_nr" type="int">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="customer_department" type="text"></column>
+            <column name="title" type="text">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="status" type="text">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="5" author="marvin">
+        <createTable tableName="order">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="order_file" type="blob">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="marvin">
+        <addForeignKeyConstraint baseTableName="report_data" baseColumnNames="id" constraintName="fk_order_nr"
+                                 referencedTableName="order"
+                                 referencedColumnNames="id"></addForeignKeyConstraint>
     </changeSet>
 </databaseChangeLog>
