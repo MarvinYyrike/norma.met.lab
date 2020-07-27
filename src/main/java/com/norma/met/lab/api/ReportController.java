@@ -12,21 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("report")
 public class ReportController {
 
-/*    @Autowired
+   @Autowired
     ReportService reportService;
 
     //TODO generateReport (võtab sisse igasugu andmeid raporti kohta)
-    @PutMapping
+    @PostMapping
     public void generateReport(Report report) {
         reportService.generateReport(report);
     }
-    //TODO editReport (saab raportit muuta)
-    @PostMapping
+    //TODO editReport (saab raportit muuta, viskab viimase wordi ette)
+    @PutMapping("/edit_file")
+    public void editReport (String reportNo){
+        reportService.editReport(reportNo);
+    }
+
+    @PutMapping("/edit")
     public void editReport (Report report){
         reportService.editReport(report);
     }
-    @PostMapping
+
+    @PutMapping("/finish")
     public void finishReport (int reportId){
-        ReportService.finishReport(reportId);
-    }*/
+        reportService.finishReport(reportId);
+    }
 }

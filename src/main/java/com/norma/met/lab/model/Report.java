@@ -4,11 +4,32 @@ public class Report {
 
     private Object order;
     private String customer;
+    private String customerEmail;
     private String customerDepartment;
+    private String reportNr;
     private String title;
     private String status;
     private Object reportPDF;
 
+
+    public Report(Object order, String customer, String customerEmail, String customerDepartment, String reportNr, String title, String status, Object reportPDF) {
+        this.order = order;
+        this.customer = customer;
+        this.customerEmail = customerEmail;
+        this.customerDepartment = customerDepartment;
+        this.reportNr = reportNr;
+        this.title = title;
+        this.status = status;
+        this.reportPDF = reportPDF;
+    }
+
+    public String getReportNr() {
+        return reportNr;
+    }
+
+    public void setReportNr(String reportNr) {
+        this.reportNr = reportNr;
+    }
 
     public Object getOrder() {
         return order;
@@ -24,6 +45,14 @@ public class Report {
 
     public void setCustomer(String customer) {
         this.customer = customer;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public String getCustomerDepartment() {
@@ -56,16 +85,5 @@ public class Report {
 
     public void setReportPDF(Object reportPDF) {
         this.reportPDF = reportPDF;
-    }
-
-    public Report(Object order, String customer, String customerDepartment, String title, String status, Object reportPDF) {
-        this.order = order;
-        this.customer = customer;
-        this.customerDepartment = customerDepartment;
-        this.title = title;
-        this.status = status;
-        this.reportPDF = reportPDF;
-
-
     }
 }

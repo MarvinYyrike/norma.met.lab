@@ -26,7 +26,7 @@
     <changeSet id="2" author="marvin">
         <createTable tableName="report">
             <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"></constraints>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="report_PDF" type="blob">
             </column>
@@ -36,7 +36,7 @@
     <changeSet id="3" author="marvin">
         <addColumn tableName="report_data">
             <column name="report_nr" type="int">
-                <constraints foreignKeyName="fk_report_nr" referencedTableName="report" referencedColumnNames="id"></constraints>
+                <constraints foreignKeyName="fk_report_nr" referencedTableName="report" referencedColumnNames="id"/>
             </column>
         </addColumn>
     </changeSet>
@@ -44,14 +44,14 @@
     <changeSet id="4" author="marvin">
         <addColumn tableName="report_data">
             <column name="order_nr" type="int">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
-            <column name="customer_department" type="text"></column>
+            <column name="customer_department" type="text"/>
             <column name="title" type="text">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
             <column name="status" type="text">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
         </addColumn>
     </changeSet>
@@ -62,7 +62,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="order_file" type="blob">
-                <constraints nullable="false"></constraints>
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
@@ -70,6 +70,99 @@
     <changeSet id="6" author="marvin">
         <addForeignKeyConstraint baseTableName="report_data" baseColumnNames="id" constraintName="fk_order_nr"
                                  referencedTableName="order"
-                                 referencedColumnNames="id"></addForeignKeyConstraint>
+                                 referencedColumnNames="id"/>
     </changeSet>
+
+    <changeSet id="7" author="marvin">
+        <renameTable oldTableName="report" newTableName="report_file"/>
+    </changeSet>
+
+    <changeSet id="8" author="marvin">
+        <renameTable oldTableName="report_data" newTableName="report"/>
+    </changeSet>
+
+    <changeSet id="9" author="marvin">
+        <renameTable oldTableName="order" newTableName="order_file"/>
+    </changeSet>
+
+    <changeSet id="10" author="marvin">
+        <createTable tableName="customer_department">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/> </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="11" author="marvin">
+        <renameColumn tableName="report" oldColumnName="customer_department" newColumnName="customer_department_id"/>
+    </changeSet>
+
+    <changeSet id="12" author="marvin">
+        <modifyDataType tableName="report" columnName="customer_department_id" newDataType="int"/>
+    </changeSet>
+
+    <changeSet id="13" author="marvin">
+        <addColumn tableName="customer_department">
+            <column name="department" type="text"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="14" author="marvin">
+        <addForeignKeyConstraint baseTableName="report" baseColumnNames="customer_department_id"
+                                 constraintName="fk_customer_department"
+                                 referencedTableName="customer_department"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="15" author="marvin">
+        <addForeignKeyConstraint baseTableName="report" baseColumnNames="order_nr" constraintName="fk_order_id"
+                                 referencedTableName="order_file"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="16" author="marvin">
+        <renameColumn tableName="report" oldColumnName="report_nr" newColumnName="report_id"/>
+    </changeSet>
+
+    <changeSet id="17" author="marvin">
+        <renameColumn tableName="report" oldColumnName="order_nr" newColumnName="order_id"/>
+    </changeSet>
+
+    <changeSet id="18" author="marvin">
+        <dropAllForeignKeyConstraints baseTableName="report"/>
+    </changeSet>
+
+    <changeSet id="19" author="marvin">
+        <addForeignKeyConstraint baseTableName="report" baseColumnNames="report_id" constraintName="fk_report_id"
+                                 referencedTableName="report_file"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="report" baseColumnNames="order_id" constraintName="fk_order_id"
+                                 referencedTableName="order_file"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="report" baseColumnNames="customer_department_id"
+                                 constraintName="fk_customer_department_id"
+                                 referencedTableName="customer_department"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="20" author="marvin">
+        <addColumn tableName="report">
+            <column name="report_nr" type="int">
+                <constraints nullable="false"/> </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="21" author="marvin">
+        <renameColumn tableName="report" oldColumnName="report_id" newColumnName="report_file_id"/>
+    </changeSet>
+
+    <changeSet id="22" author="marv">
+        <renameColumn tableName="report" oldColumnName="order_id" newColumnName="order_file_id"/>
+    </changeSet>
+
+    <changeSet id="23" author="marv">
+        <addColumn tableName="report_file">
+            <column name="draft" type="blob"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
