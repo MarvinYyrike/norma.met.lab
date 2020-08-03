@@ -2,6 +2,7 @@ package com.norma.met.lab.api;
 
 import com.norma.met.lab.model.Report;
 import com.norma.met.lab.service.ReportService;
+import com.norma.met.lab.service.ReportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReportController {
 
    @Autowired
-    ReportService reportService;
+   ReportService reportService;
 
     //TODO generateReport (võtab sisse igasugu andmeid raporti kohta)
     @PostMapping
@@ -23,7 +24,7 @@ public class ReportController {
     //TODO editReport (saab raportit muuta, viskab viimase wordi ette)
     @PutMapping("/edit_file")
     public void editReport (String reportNo){
-        reportService.editReport(reportNo);
+        reportService.editReportData(reportNo);
     }
 
     @PutMapping("/edit")

@@ -1,5 +1,7 @@
 package com.norma.met.lab.model;
 
+import javassist.bytecode.ByteArray;
+
 public class Report {
 
     private Object order;
@@ -35,7 +37,7 @@ public class Report {
         return order;
     }
 
-    public void setOrder(Object order) {
+    public void setOrder(ByteArray order) {
         this.order = order;
     }
 
@@ -83,7 +85,7 @@ public class Report {
         return reportPDF;
     }
 
-    public void setReportPDF(Object reportPDF) {
+    public void setReportPDF(ByteArray reportPDF) {
         this.reportPDF = reportPDF;
     }
 }
